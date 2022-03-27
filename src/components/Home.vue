@@ -8,15 +8,26 @@
 </template>
 
 <script>
-export default{
-    name: "Home",
-    data(){
-        return{
-            mybox:'',
-            list:['北京','上海','深圳']
+export default {
+  name: "Home",
+  data() {
+    return {
+      mybox: "",
+      list: [],
+    };
+  },
+  methods: {},
+  components: {},
+  created() {
+    this.$http
+      .get("/localhost_api/practice/dict-region/getProvince")
+      .then((res) => {
+        for (var i = 0; i < res.data.length; i++) {
+          this.list.push(res.data[i].regionName);
         }
-    }
-}
+      });
+  },
+};
 </script>
 
 <style scoped>

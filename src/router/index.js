@@ -18,3 +18,9 @@ export default new Router({
     }
   ]
 })
+
+// const router = new VueRouter({
+//   // mode: "history",      //注释即为默认的hash值
+//   base: process.env.BASE_URL,
+//   routes,
+// });
