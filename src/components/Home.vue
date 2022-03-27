@@ -2,7 +2,10 @@
   <div id="add">
     <h1>欢迎进入EamonPlanet！</h1>
     <select v-model="mybox">
-      <option v-for="item in list" :value="item">{{ item }}</option>
+      <option v-for="item in list" :value="item">
+        {{ item.regionName }}
+        <div v-show="false" v-text="item.regionCode"></div>
+        </option>
     </select>
   </div>
 </template>
@@ -22,9 +25,10 @@ export default {
     this.$http
       .get("/localhost_api/practice/dict-region/getProvince")
       .then((res) => {
-        for (var i = 0; i < res.data.length; i++) {
-          this.list.push(res.data[i].regionName);
-        }
+        this.list = res.data;
+        // for (var i = 0; i < res.data.length; i++) {
+        //   this.list.push(res.data[i].regionName);
+        // }
       });
   },
 };
