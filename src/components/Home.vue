@@ -25,6 +25,24 @@
       value="提交"
       @click.native="goSubmitBtn"
     />
+
+    <el-alert
+      title="成功提示"
+      type="success"
+      v-show="success"
+      description="注册成功！若未来的某一天是恶劣天气，您将提前一天收到小名的推送，提醒您带伞"
+      show-icon
+    >
+    </el-alert>
+
+    <el-alert
+      title="错误提示"
+      type="error"
+      v-show="error"
+      description="注册有误！"
+      show-icon
+    >
+    </el-alert>
   </div>
 </template>
 
@@ -37,6 +55,8 @@ export default {
       myuid: "",
       list: [],
       input: "",
+      success: false,
+      error: false,
     };
   },
   methods: {
@@ -44,16 +64,18 @@ export default {
       console.log("这里是goSubmitBtn：" + this.$route.query.uid);
       const param = { uid: this.$route.query.uid };
       this.$http
-        .post(
-          '/localhost_api/practice/rtbau-user/saveUserMsg',
-          {
-            uid: this.$route.query.uid,
-            nickName: this.input,
-            regionCode: this.mybox,
+        .post("/localhost_api/practice/rtbau-user/saveUserMsg", {
+          uid: this.$route.query.uid,
+          nickName: this.input,
+          regionCode: this.mybox,
+        })
+        .then( (res) => {
+          console.log("【后端返回的结果是】" + res.data);
+          if(res.data){
+            this.success=true
+          }else{
+            this.error=true
           }
-        )
-        .then(function (res) {
-          console.log("【结果是】" + res);
         });
     },
   },
