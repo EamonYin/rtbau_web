@@ -2,13 +2,18 @@
   <div id="add">
     <h1>欢迎进入EamonPlanet！</h1>
     <el-select v-model="mybox" placeholder="请选择地区">
-      <el-option v-for="item in list" key="label" :value="item.regionCode" :label="item.regionName">
+      <el-option
+        v-for="item in list"
+        :value="item.regionCode"
+        :label="item.regionName"
+      >
         <!-- {{ item.regionName }}
         <div v-show="false" v-text="item.regionCode"></div> -->
       </el-option>
     </el-select>
-    <br>
-    <!-- <span>您选择的地区为：{{ mybox }}</span> -->
+    <br />
+    <span>您选择的地区为：{{ mybox }}</span>
+    <span>我的uid：{{ myuid }}</span>
   </div>
 </template>
 
@@ -18,6 +23,7 @@ export default {
   data() {
     return {
       mybox: "",
+      myuid: "",
       list: [],
     };
   },
@@ -32,6 +38,9 @@ export default {
         //   this.list.push(res.data[i].regionName);
         // }
       });
+    let uid = this.$route.query.uid;
+    console.log("哈哈哈" + uid);
+    this.myuid = uid
   },
 };
 </script>
